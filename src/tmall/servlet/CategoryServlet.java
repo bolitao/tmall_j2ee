@@ -38,13 +38,13 @@ public class CategoryServlet extends BaseBackServlet {
         try {
             if (null != is && 0 != is.available()) {
                 try (FileOutputStream fos = new FileOutputStream(file)) {
-                    byte b[] = new byte[1024 * 1024];
+                    byte[] b = new byte[1024 * 1024];
                     int length = 0;
                     while (-1 != (length = is.read(b))) {
                         fos.write(b, 0, length);
                     }
                     fos.flush();
-                    // 通过如下代码，把文件保存为jpg格式
+                    // 通过如下代码，把文件保存为 jpg 格式
                     BufferedImage img = ImageUtil.change2jpg(file);
                     assert img != null;
                     ImageIO.write(img, "jpg", file);

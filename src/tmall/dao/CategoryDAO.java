@@ -30,7 +30,7 @@ public class CategoryDAO {
     public void add(Category bean) {
         String sql = "INSERT INTO category VALUES(null, ?)";
         try (Connection connection = DBUtil.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql)) {
+             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, bean.getName());
             statement.execute();
             ResultSet resultSet = statement.getGeneratedKeys();

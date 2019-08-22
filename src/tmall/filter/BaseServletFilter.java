@@ -22,7 +22,7 @@ public class BaseServletFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) resp;
         String contextPath = request.getServletContext().getContextPath();
-        System.out.println("ContextPath: " + contextPath);
+        // System.out.println("ContextPath: " + contextPath);
         String uri = request.getRequestURI();
         uri = StringUtils.remove(uri, contextPath);
         if (uri.startsWith("/admin_")) {
