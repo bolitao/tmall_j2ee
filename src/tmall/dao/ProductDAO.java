@@ -272,13 +272,23 @@ public class ProductDAO {
         return beans;
     }
 
+    /**
+     * 设置主图片
+     *
+     * @param p 某项产品
+     */
     public void setFirstProductImage(Product p) {
-        List<ProductImage> pis = new ProductImageDAO().li11st(p, ProductImageDAO.type_single);
+        List<ProductImage> pis = new ProductImageDAO().list(p, ProductImageDAO.type_single);
         if (!pis.isEmpty()) {
             p.setFirstProductImage(pis.get(0));
         }
     }
 
+    /**
+     * 统计销量
+     *
+     * @param p 某项产品
+     */
     public void setSaleAndReviewNumber(Product p) {
         int saleCount = new OrderItemDAO().getSaleCount(p.getId());
         p.setSaleCount(saleCount);
@@ -287,9 +297,55 @@ public class ProductDAO {
 
     }
 
+    /**
+     * 统计销量
+     *
+     * @param products 产品 List
+     */
     public void setSaleAndReviewNumber(List<Product> products) {
         for (Product p : products) {
             setSaleAndReviewNumber(p);
+        }
+    }
+
+    /**
+     * 为产品设置分类
+     *
+     * @param cs 分类
+     */
+    public void fill(List<Category> cs) {
+        for (Category c : cs) {
+            fill(c);
+        }
+    }
+
+    /**
+     * 设置分类
+     *
+     * @param c 分类
+     */
+    public void fill(Category c) {
+        List<Product> ps = this.list(c.getId());
+        c.setProducts(ps);
+    }
+
+    /**
+     * TODO: fix bug
+     *
+     * @param cs 分类
+     */
+    public void fillByRow(List<Category> cs) {
+        int productNumberEachRow = 8;
+        for (Category c : cs) {
+            List<Product> products = c.getProducts();
+            List<List<Product>> productsByRow = new ArrayList<>();
+            for (int i = 0; i < products.size(); i += productNumberEachRow) {
+                int size = i + productNumberEachRow;
+                size = size > products.size() ? products.size() : size;
+                List<Product> productsOfEachRow = products.subList(i, size);
+                productsByRow.add(productsOfEachRow);
+            }
+            c.setProductsByRow(productsByRow);
         }
     }
 }
