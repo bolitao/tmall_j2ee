@@ -84,11 +84,11 @@ public class CategoryDAO {
     }
 
     /**
-     * 分页查询
+     * Query categories by given start and count
      *
-     * @param start 开始
-     * @param count 结束
-     * @return 分页查询结果
+     * @param start start
+     * @param count count
+     * @return category results order by id
      */
     public List<Category> list(int start, int count) {
         List<Category> categoryList = new ArrayList<Category>();
@@ -113,9 +113,9 @@ public class CategoryDAO {
     }
 
     /**
-     * 查询所有数据
+     * Query all category data
      *
-     * @return 所有数据的 List 集合
+     * @return all category result
      */
     public List<Category> categoryList() {
         return list(0, Short.MAX_VALUE);
