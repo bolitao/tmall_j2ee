@@ -23,14 +23,54 @@ import java.util.Map;
  */
 @WebServlet(name = "BaseBackServlet")
 public abstract class BaseBackServlet extends HttpServlet {
+    /**
+     * add method of end-management
+     *
+     * @param request  request
+     * @param response response
+     * @param page     page info
+     * @return redirect
+     */
     public abstract String add(HttpServletRequest request, HttpServletResponse response, Page page);
 
+    /**
+     * delete method of end-management
+     *
+     * @param request  request
+     * @param response response
+     * @param page     page
+     * @return redirect
+     */
     public abstract String delete(HttpServletRequest request, HttpServletResponse response, Page page);
 
+    /**
+     * edit method of end-management
+     *
+     * @param request  request
+     * @param response response
+     * @param page     page
+     * @return redirect
+     */
     public abstract String edit(HttpServletRequest request, HttpServletResponse response, Page page);
 
+    /**
+     * update method of end-management
+     *
+     * @param request  request
+     * @param response response
+     * @param page     page
+     * @return redirect
+     */
     public abstract String update(HttpServletRequest request, HttpServletResponse response, Page page);
 
+    /**
+     * query method of end-management
+     *
+     * @param request  request
+     * @param response response
+     * @param page     page
+     * @return redirect
+     */
     public abstract String list(HttpServletRequest request, HttpServletResponse response, Page page);
 
     protected CategoryDAO categoryDAO = new CategoryDAO();
@@ -58,7 +98,6 @@ public abstract class BaseBackServlet extends HttpServlet {
             } catch (Exception ignored) {
             }
             Page page = new Page(start, count);
-            // 借助反射，调用对应的方法
             String method = (String) req.getAttribute("method");
             // TODO: reflex
             Method m = this.getClass().getMethod(method, javax.servlet.http.HttpServletRequest.class,
@@ -81,7 +120,7 @@ public abstract class BaseBackServlet extends HttpServlet {
         }
     }
 
-    public InputStream parseUpload(HttpServletRequest request, Map<String, String> params) {
+    InputStream parseUpload(HttpServletRequest request, Map<String, String> params) {
         InputStream is = null;
         try {
             DiskFileItemFactory factory = new DiskFileItemFactory();
