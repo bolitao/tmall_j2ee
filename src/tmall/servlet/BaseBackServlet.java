@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Method;
-import java.util.Iterator;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 
@@ -46,8 +46,7 @@ public abstract class BaseBackServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-
-            // TODO: 获取分页信息
+            // by default, index value is 0 and 5 pieces of data per page
             int start = 0;
             int count = 5;
             try {
@@ -61,16 +60,19 @@ public abstract class BaseBackServlet extends HttpServlet {
             Page page = new Page(start, count);
             // 借助反射，调用对应的方法
             String method = (String) req.getAttribute("method");
-            // TODO: 加强对反射机制的理解
+            // TODO: reflex
             Method m = this.getClass().getMethod(method, javax.servlet.http.HttpServletRequest.class,
                     javax.servlet.http.HttpServletResponse.class, Page.class);
             String redirect = m.invoke(this, req, resp, page).toString();
-            // 根据方法的返回值，进行相应的客户端跳转，服务端跳转，或者仅仅是输出字符串
+            // do specific things according to the value of redirect
             if (redirect.startsWith("@")) {
+                // send redirect
                 resp.sendRedirect(redirect.substring(1));
             } else if (redirect.startsWith("%")) {
+                // print
                 resp.getWriter().print(redirect.substring(1));
             } else {
+                // server-end forward
                 req.getRequestDispatcher(redirect).forward(req, resp);
             }
         } catch (Exception e) {
@@ -84,22 +86,21 @@ public abstract class BaseBackServlet extends HttpServlet {
         try {
             DiskFileItemFactory factory = new DiskFileItemFactory();
             ServletFileUpload upload = new ServletFileUpload(factory);
-            // 上传文件大小限制为 10M
+            // 10M limit of upload
             factory.setSizeThreshold(10 * 1024 * 1024);
             List items = upload.parseRequest(request);
             for (Object o : items) {
                 FileItem item = (FileItem) o;
+                // if return value of item.isFormField is true, it means item is normal form (not file)
                 if (!item.isFormField()) {
-                    // 获取上传文件的输入流
                     is = item.getInputStream();
                 } else {
                     String paramName = item.getFieldName();
                     String paramValue = item.getString();
-                    paramValue = new String(paramValue.getBytes("ISO-8859-1"), "UTF-8");
+                    paramValue = new String(paramValue.getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
                     params.put(paramName, paramValue);
                 }
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -25,16 +25,13 @@ public class CategoryServlet extends BaseBackServlet {
     @Override
     public String add(HttpServletRequest request, HttpServletResponse response, Page page) {
         Map<String, String> params = new HashMap<>();
-        InputStream is = super.parseUpload(request, params);
-
         String name = params.get("name");
         Category c = new Category();
         c.setName(name);
         categoryDAO.add(c);
-
         File imageFolder = new File(request.getSession().getServletContext().getRealPath("img/category"));
         File file = new File(imageFolder, c.getId() + ".jpg");
-
+        InputStream is = super.parseUpload(request, params);
         try {
             if (null != is && 0 != is.available()) {
                 try (FileOutputStream fos = new FileOutputStream(file)) {
@@ -113,8 +110,10 @@ public class CategoryServlet extends BaseBackServlet {
         return "@admin_category_list";
     }
 
+
     @Override
     public String list(HttpServletRequest request, HttpServletResponse response, Page page) {
+        // get category data by sent in page's start and count
         List<Category> cs = categoryDAO.list(page.getStart(), page.getCount());
         int total = categoryDAO.getTotal();
         page.setTotal(total);

@@ -4,8 +4,17 @@ package tmall.util;
  * @author Boli Tao
  */
 public class Page {
+    /**
+     * start index
+     */
     int start;
+    /**
+     * amount of category info per page
+     */
     int count;
+    /**
+     * amount of category data
+     */
     int total;
     String param;
 
@@ -33,13 +42,17 @@ public class Page {
 
     public boolean isHasPreviouse() {
         return start != 0;
-
     }
 
     public boolean isHasNext() {
         return start != getLast();
     }
 
+    /**
+     * get total pages amount
+     *
+     * @return total page
+     */
     public int getTotalPage() {
         int totalPage;
         // 假设总数是50，是能够被5整除的，那么就有10页
@@ -50,7 +63,6 @@ public class Page {
         else {
             totalPage = total / count + 1;
         }
-
         if (0 == totalPage) {
             totalPage = 1;
         }
@@ -58,6 +70,11 @@ public class Page {
 
     }
 
+    /**
+     * get the index of last page
+     *
+     * @return index of last page
+     */
     public int getLast() {
         int last;
         // 假设总数是50，是能够被5整除的，那么最后一页的开始就是45
@@ -68,7 +85,6 @@ public class Page {
         else {
             last = total - total % count;
         }
-
         last = Math.max(last, 0);
         return last;
     }

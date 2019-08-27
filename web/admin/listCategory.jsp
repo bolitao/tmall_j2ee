@@ -7,7 +7,6 @@
 
 <script>
     $(function () {
-
         $("#addForm").submit(function () {
             if (!checkEmpty("name", "分类名称"))
                 return false;
@@ -20,13 +19,10 @@
 </script>
 
 <title>分类管理</title>
-
-
 <div class="workingArea">
     <h1 class="label label-info">分类管理</h1>
     <br>
     <br>
-
     <div class="listDataTableDiv">
         <table class="table table-striped table-bordered table-hover  table-condensed">
             <thead>
@@ -42,28 +38,26 @@
             </thead>
             <tbody>
             <c:forEach items="${thecs}" var="c">
-
+                <%--                <script>--%>
+                <%--                    console.log(${thecs})--%>
+                <%--                </script>--%>
                 <tr>
                     <td>${c.id}</td>
                     <td><img height="40px" src="img/category/${c.id}.jpg"></td>
                     <td>${c.name}</td>
-
                         <%-- 					<td><a href="admin_property_list?cid=${c.id}"><span class="glyphicon glyphicon-th-list"></span></a></td>					 --%>
                         <%-- 					<td><a href="admin_product_list?cid=${c.id}"><span class="glyphicon glyphicon-shopping-cart"></span></a></td>					 --%>
                     <td><a href="admin_category_edit?id=${c.id}"><span class="glyphicon glyphicon-edit"></span></a></td>
                     <td><a deleteLink="true" href="admin_category_delete?id=${c.id}"><span
-                            class=" 	glyphicon glyphicon-trash"></span></a></td>
-
+                            class="glyphicon glyphicon-trash"></span></a></td>
                 </tr>
             </c:forEach>
             </tbody>
         </table>
     </div>
-
     <div class="pageDiv">
         <%@include file="../include/admin/adminPage.jsp" %>
     </div>
-
     <div class="panel panel-warning addDiv">
         <div class="panel-heading">新增分类</div>
         <div class="panel-body">
@@ -74,7 +68,7 @@
                         <td><input id="name" name="name" type="text" class="form-control"></td>
                     </tr>
                     <tr>
-                        <td>分类圖片</td>
+                        <td>分类图片</td>
                         <td>
                             <input id="categoryPic" accept="image/*" type="file" name="filepath"/>
                         </td>
@@ -88,7 +82,5 @@
             </form>
         </div>
     </div>
-
 </div>
-
 <%@include file="../include/admin/adminFooter.jsp" %>
