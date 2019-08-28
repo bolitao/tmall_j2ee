@@ -36,8 +36,6 @@ public class CategoryDAO {
             ResultSet resultSet = statement.getGeneratedKeys();
             if (resultSet.next()) {
                 int id = resultSet.getInt(1);
-                // 在这里给传入的 bean 设置 id 目的是之后对 bean 继续进行操作
-                // 比如 CategoryServlet 中的 add 方法就使用到了 bean 的 getID() 方法
                 bean.setId(id);
             }
         } catch (SQLException e) {

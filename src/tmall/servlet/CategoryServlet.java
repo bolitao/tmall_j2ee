@@ -1,6 +1,5 @@
 package tmall.servlet;
 
-import com.sun.xml.internal.ws.api.message.Header;
 import tmall.bean.Category;
 import tmall.util.ImageUtil;
 import tmall.util.Page;
@@ -42,7 +41,7 @@ public class CategoryServlet extends BaseBackServlet {
                         fos.write(b, 0, length);
                     }
                     fos.flush();
-                    // transfer other image type to jpg
+                    // save jpg file
                     BufferedImage img = ImageUtil.change2jpg(file);
                     assert img != null;
                     ImageIO.write(img, "jpg", file);
@@ -71,28 +70,24 @@ public class CategoryServlet extends BaseBackServlet {
         return "admin/editCategory.jsp";
     }
 
-    /**
-     * 修改已存在的分类信息
-     * fixme: 修改分类图片后浏览器仍然从缓存中加载旧图片
-     *
-     * @param request  request
-     * @param response response
-     * @param page     page
-     * @return 跳转信息
-     */
     @Override
     public String update(HttpServletRequest request, HttpServletResponse response, Page page) {
         Map<String, String> params = new HashMap<>();
         InputStream is = super.parseUpload(request, params);
+
+        System.out.println(params);
         String name = params.get("name");
         int id = Integer.parseInt(params.get("id"));
+
         Category c = new Category();
         c.setId(id);
         c.setName(name);
         categoryDAO.update(c);
+
         File imageFolder = new File(request.getSession().getServletContext().getRealPath("img/category"));
         File file = new File(imageFolder, c.getId() + ".jpg");
-        boolean result = file.getParentFile().mkdirs();
+        file.getParentFile().mkdirs();
+
         try {
             if (null != is && 0 != is.available()) {
                 try (FileOutputStream fos = new FileOutputStream(file)) {
