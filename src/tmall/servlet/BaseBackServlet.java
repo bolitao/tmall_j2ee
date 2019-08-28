@@ -120,6 +120,13 @@ public abstract class BaseBackServlet extends HttpServlet {
         }
     }
 
+    /**
+     * upload
+     *
+     * @param request request
+     * @param params  parameters
+     * @return InputStream
+     */
     InputStream parseUpload(HttpServletRequest request, Map<String, String> params) {
         InputStream is = null;
         try {
@@ -134,8 +141,10 @@ public abstract class BaseBackServlet extends HttpServlet {
                 if (!item.isFormField()) {
                     is = item.getInputStream();
                 } else {
+                    // get data from form except file
                     String paramName = item.getFieldName();
                     String paramValue = item.getString();
+                    // re-set encoding
                     paramValue = new String(paramValue.getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
                     params.put(paramName, paramValue);
                 }

@@ -21,6 +21,12 @@ import javax.imageio.ImageIO;
  */
 public class ImageUtil {
 
+    /**
+     * transfer image to jpg file
+     *
+     * @param f an image file
+     * @return BufferedImage
+     */
     public static BufferedImage change2jpg(File f) {
         try {
             java.awt.Image i = Toolkit.getDefaultToolkit().createImage(f.getAbsolutePath());
