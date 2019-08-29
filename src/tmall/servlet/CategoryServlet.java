@@ -73,7 +73,7 @@ public class CategoryServlet extends BaseBackServlet {
 
     /**
      * 修改已存在的分类信息
-     * fixme: 修改分类图片后浏览器仍然从缓存中加载旧图片
+     * FIXME: 修改分类图片后浏览器仍然从缓存中加载旧图片
      *
      * @param request  request
      * @param response response

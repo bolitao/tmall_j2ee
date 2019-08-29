@@ -25,6 +25,11 @@ public class BaseServletFilter implements Filter {
         // System.out.println("ContextPath: " + contextPath);
         String uri = request.getRequestURI();
         uri = StringUtils.remove(uri, contextPath);
+        // System.out.println(uri);
+        if ("/index".equals(uri)) {
+            ((HttpServletResponse) resp).sendRedirect("./admin_category_list");
+            return;
+        }
         if (uri.startsWith("/admin_")) {
             // 截取 uri 中间部分，以获得跳转 servlet
             String servletPath = StringUtils.substringBetween(uri, "_", "_") + "Servlet";
@@ -39,7 +44,6 @@ public class BaseServletFilter implements Filter {
 
     @Override
     public void init(FilterConfig config) throws ServletException {
-
     }
 
 }

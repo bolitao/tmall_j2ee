@@ -4,6 +4,15 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
     <filter>
+        <filter-name>encodingFilter</filter-name>
+        <filter-class>tmall.filter.EncodingFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
         <filter-name>baseServletFilter</filter-name>
         <filter-class>tmall.filter.BaseServletFilter</filter-class>
     </filter>
@@ -16,9 +25,17 @@
         <servlet-name>CategoryServlet</servlet-name>
         <servlet-class>tmall.servlet.CategoryServlet</servlet-class>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>CategoryServlet</servlet-name>
         <url-pattern>/categoryServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>propertyServlet</servlet-name>
+        <servlet-class>tmall.servlet.PropertyServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>propertyServlet</servlet-name>
+        <url-pattern>/propertyServlet</url-pattern>
     </servlet-mapping>
 </web-app>
