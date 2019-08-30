@@ -24,7 +24,7 @@ public class DBUtil {
     }
 
     public static Connection getConnection() throws SQLException {
-        String url = String.format("jdbc:mysql://%s:%d/%s?characterEncoding=%s&serverTimezone=UTC", ip, port, database, encoding);
+        String url = String.format("jdbc:mysql://%s:%d/%s?characterEncoding=%s&serverTimezone=GMT%%2B8", ip, port, database, encoding);
         return DriverManager.getConnection(url, loginName, password);
     }
 

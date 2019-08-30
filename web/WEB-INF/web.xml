@@ -59,4 +59,13 @@
         <servlet-name>testLog4jServlet</servlet-name>
         <url-pattern>/log4jTest</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>productServlet</servlet-name>
+        <servlet-class>tmall.servlet.ProductServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>productServlet</servlet-name>
+        <url-pattern>/productServlet</url-pattern>
+    </servlet-mapping>
 </web-app>
