@@ -3,6 +3,12 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+    <context-param>
+        <param-name>log4j-config-location</param-name>
+        <param-value>WEB-INF/log4j.properties</param-value>
+    </context-param>
+
+
     <filter>
         <filter-name>encodingFilter</filter-name>
         <filter-class>tmall.filter.EncodingFilter</filter-class>
@@ -21,6 +27,12 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
+
+    <listener>
+        <listener-class>tmall.listener.ContextListener</listener-class>
+    </listener>
+
+
     <servlet>
         <servlet-name>CategoryServlet</servlet-name>
         <servlet-class>tmall.servlet.CategoryServlet</servlet-class>
@@ -37,5 +49,14 @@
     <servlet-mapping>
         <servlet-name>propertyServlet</servlet-name>
         <url-pattern>/propertyServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>testLog4jServlet</servlet-name>
+        <servlet-class>tmall.servlet.TestLog4jServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>testLog4jServlet</servlet-name>
+        <url-pattern>/log4jTest</url-pattern>
     </servlet-mapping>
 </web-app>

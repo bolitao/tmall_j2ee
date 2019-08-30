@@ -1,6 +1,5 @@
 package tmall.servlet;
 
-import com.sun.xml.internal.ws.api.message.Header;
 import tmall.bean.Category;
 import tmall.util.ImageUtil;
 import tmall.util.Page;
