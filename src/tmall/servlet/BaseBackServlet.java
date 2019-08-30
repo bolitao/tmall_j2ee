@@ -86,7 +86,7 @@ public abstract class BaseBackServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            // by default, index value is 0 and 5 pieces of data per page
+            // by default, index value starts from 0 and 5 pieces of data per page
             int start = 0;
             int count = 5;
             try {

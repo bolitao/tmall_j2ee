@@ -73,13 +73,13 @@ public class PropertyServlet extends BaseBackServlet {
     @Override
     public String list(HttpServletRequest request, HttpServletResponse response, Page page) {
         int cid = Integer.parseInt(request.getParameter("cid"));
-        logger.debug("cid: " + cid + ", page.start: " + page.getStart() + ", page.count: " + page.getCount());
+        // logger.debug("cid: " + cid + ", page.start: " + page.getStart() + ", page.count: " + page.getCount());
         Category category = categoryDAO.get(cid);
         List<Property> propertyList = propertyDAO.list(cid, page.getStart(), page.getCount());
-        logger.debug("Debug: " + propertyList.toString());
+        // logger.debug("Debug: " + propertyList.toString());
         int total = propertyDAO.getTotal(cid);
         page.setTotal(total);
-        logger.debug("Debug: total: " + total);
+        // logger.debug("Debug: total: " + total);
         // parameter 中 cid 表示某一个分类
         page.setParam("&cid=" + cid);
         request.setAttribute("c", category);

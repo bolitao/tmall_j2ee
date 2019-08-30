@@ -4,6 +4,9 @@ package tmall.bean;
  * @author boli
  */
 public class ProductImage {
+    /**
+     * single or detail
+     */
     private String type;
     private Product product;
     private int id;

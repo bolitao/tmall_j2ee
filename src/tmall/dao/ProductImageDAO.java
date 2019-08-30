@@ -37,26 +37,23 @@ public class ProductImageDAO {
     }
 
     public void add(ProductImage bean) {
-
         String sql = "insert into productimage values(null,?,?)";
-        try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
+        try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
             ps.setInt(1, bean.getProduct().getId());
             ps.setString(2, bean.getType());
             ps.execute();
-
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 int id = rs.getInt(1);
                 bean.setId(id);
             }
         } catch (SQLException e) {
-
             e.printStackTrace();
         }
     }
 
     public void update(ProductImage bean) {
-
+        // TODO: finish update() method
     }
 
     public void delete(int id) {

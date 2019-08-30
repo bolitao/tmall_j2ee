@@ -97,7 +97,7 @@ public class ProductServlet extends BaseBackServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         Product p = productDAO.get(id);
         request.setAttribute("p", p);
-        List<Property> pts = propertyDAO.list(p.getCategory().getId());
+        // List<Property> pts = propertyDAO.list(p.getCategory().getId());
         propertyValueDAO.init(p);
         List<PropertyValue> pvs = propertyValueDAO.list(p.getId());
         request.setAttribute("pvs", pvs);

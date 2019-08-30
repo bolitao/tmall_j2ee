@@ -22,8 +22,7 @@
                 return false;
             if (!checkNumber("promotePrice", "优惠价格"))
                 return false;
-            // return checkInt("stock", "库存");
-
+            return checkInt("stock", "库存");
         });
     });
 </script>

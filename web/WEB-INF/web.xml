@@ -68,4 +68,13 @@
         <servlet-name>productServlet</servlet-name>
         <url-pattern>/productServlet</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>productImageServlet</servlet-name>
+        <servlet-class>tmall.servlet.ProductImageServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>productImageServlet</servlet-name>
+        <url-pattern>/productImageServlet</url-pattern>
+    </servlet-mapping>
 </web-app>
