@@ -15,7 +15,7 @@ public class UserDAO {
         int total = 0;
         try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
 
-            String sql = "select count(*) from User";
+            String sql = "select count(*) from user";
 
             ResultSet rs = s.executeQuery(sql);
             while (rs.next()) {
@@ -71,7 +71,7 @@ public class UserDAO {
 
         try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
 
-            String sql = "delete from User where id = " + id;
+            String sql = "delete from user where id = " + id;
 
             s.execute(sql);
 
@@ -86,7 +86,7 @@ public class UserDAO {
 
         try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
 
-            String sql = "select * from User where id = " + id;
+            String sql = "select * from user where id = " + id;
 
             ResultSet rs = s.executeQuery(sql);
 
@@ -113,7 +113,7 @@ public class UserDAO {
     public List<User> list(int start, int count) {
         List<User> beans = new ArrayList<User>();
 
-        String sql = "select * from User order by id desc limit ?,? ";
+        String sql = "select * from user order by id desc limit ?,? ";
 
         try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
 
@@ -143,7 +143,7 @@ public class UserDAO {
 
     public User get(String name) {
         User bean = null;
-        String sql = "select * from User where name = ?";
+        String sql = "select * from user where name = ?";
         try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
             ps.setString(1, name);
             ResultSet rs = ps.executeQuery();

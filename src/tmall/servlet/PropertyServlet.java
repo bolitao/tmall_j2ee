@@ -1,5 +1,6 @@
 package tmall.servlet;
 
+import org.apache.log4j.Logger;
 import tmall.bean.Category;
 import tmall.bean.Property;
 import tmall.util.Page;
@@ -16,6 +17,8 @@ import java.util.List;
  */
 @WebServlet(name = "PropertyServlet")
 public class PropertyServlet extends BaseBackServlet {
+    private static final Logger logger = Logger.getLogger(PropertyServlet.class);
+
     @Override
     public String add(HttpServletRequest request, HttpServletResponse response, Page page) {
         int cid = Integer.parseInt(request.getParameter("cid"));
@@ -70,13 +73,13 @@ public class PropertyServlet extends BaseBackServlet {
     @Override
     public String list(HttpServletRequest request, HttpServletResponse response, Page page) {
         int cid = Integer.parseInt(request.getParameter("cid"));
-        System.out.println("Debug: cid: " + cid + ", page.start: " + page.getStart() + ", page.count: " + page.getCount());
+        logger.debug("cid: " + cid + ", page.start: " + page.getStart() + ", page.count: " + page.getCount());
         Category category = categoryDAO.get(cid);
         List<Property> propertyList = propertyDAO.list(cid, page.getStart(), page.getCount());
-        System.out.println("Debug: " + propertyList.toString());
+        logger.debug("Debug: " + propertyList.toString());
         int total = propertyDAO.getTotal(cid);
         page.setTotal(total);
-        System.out.println("Debug: total: " + total);
+        logger.debug("Debug: total: " + total);
         // parameter 中 cid 表示某一个分类
         page.setParam("&cid=" + cid);
         request.setAttribute("c", category);

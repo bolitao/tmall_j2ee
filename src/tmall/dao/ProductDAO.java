@@ -22,7 +22,7 @@ public class ProductDAO {
     public int getTotal(int cid) {
         int total = 0;
         try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
-            String sql = "select count(*) from Product where cid = " + cid;
+            String sql = "select count(*) from product where cid = " + cid;
             ResultSet rs = s.executeQuery(sql);
             while (rs.next()) {
                 total = rs.getInt(1);
@@ -35,7 +35,7 @@ public class ProductDAO {
 
     public void add(Product bean) {
 
-        String sql = "insert into Product values(null,?,?,?,?,?,?,?)";
+        String sql = "insert into product values(null,?,?,?,?,?,?,?)";
         try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, bean.getName());
             ps.setString(2, bean.getSubTitle());
@@ -56,7 +56,7 @@ public class ProductDAO {
     }
 
     public void update(Product bean) {
-        String sql = "update Product set name= ?, subTitle=?, orignalPrice=?,promotePrice=?,stock=?, cid = ?, createDate=? where id = ?";
+        String sql = "update product set name= ?, subTitle=?, orignalPrice=?,promotePrice=?,stock=?, cid = ?, createDate=? where id = ?";
         try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
             ps.setString(1, bean.getName());
             ps.setString(2, bean.getSubTitle());
@@ -75,7 +75,7 @@ public class ProductDAO {
 
     public void delete(int id) {
         try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
-            String sql = "delete from Product where id = " + id;
+            String sql = "delete from product where id = " + id;
             s.execute(sql);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -85,7 +85,7 @@ public class ProductDAO {
     public Product get(int id) {
         Product bean = new Product();
         try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement()) {
-            String sql = "select * from Product where id = " + id;
+            String sql = "select * from product where id = " + id;
             ResultSet rs = s.executeQuery(sql);
             if (rs.next()) {
                 String name = rs.getString("name");
@@ -119,7 +119,7 @@ public class ProductDAO {
     public List<Product> list(int cid, int start, int count) {
         List<Product> beans = new ArrayList<Product>();
         Category category = new CategoryDAO().get(cid);
-        String sql = "select * from Product where cid = ? order by id desc limit ?,? ";
+        String sql = "select * from product where cid = ? order by id desc limit ?,? ";
         try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
             ps.setInt(1, cid);
             ps.setInt(2, start);
@@ -157,7 +157,7 @@ public class ProductDAO {
 
     public List<Product> list(int start, int count) {
         List<Product> beans = new ArrayList<Product>();
-        String sql = "select * from Product limit ?,? ";
+        String sql = "select * from product limit ?,? ";
         try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
             ps.setInt(1, start);
             ps.setInt(2, count);
@@ -203,7 +203,7 @@ public class ProductDAO {
         if (null == keyword || 0 == keyword.trim().length()) {
             return beans;
         }
-        String sql = "select * from Product where name like ? limit ?,? ";
+        String sql = "select * from product where name like ? limit ?,? ";
         try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
             ps.setString(1, "%" + keyword.trim() + "%");
             ps.setInt(2, start);

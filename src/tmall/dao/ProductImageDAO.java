@@ -23,7 +23,7 @@ public class ProductImageDAO {
         int total = 0;
         try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
 
-            String sql = "select count(*) from ProductImage";
+            String sql = "select count(*) from productimage";
 
             ResultSet rs = s.executeQuery(sql);
             while (rs.next()) {
@@ -38,7 +38,7 @@ public class ProductImageDAO {
 
     public void add(ProductImage bean) {
 
-        String sql = "insert into ProductImage values(null,?,?)";
+        String sql = "insert into productimage values(null,?,?)";
         try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
             ps.setInt(1, bean.getProduct().getId());
             ps.setString(2, bean.getType());
@@ -63,7 +63,7 @@ public class ProductImageDAO {
 
         try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
 
-            String sql = "delete from ProductImage where id = " + id;
+            String sql = "delete from productimage where id = " + id;
 
             s.execute(sql);
 
@@ -78,7 +78,7 @@ public class ProductImageDAO {
 
         try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
 
-            String sql = "select * from ProductImage where id = " + id;
+            String sql = "select * from productimage where id = " + id;
 
             ResultSet rs = s.executeQuery(sql);
 
@@ -105,7 +105,7 @@ public class ProductImageDAO {
     public List<ProductImage> list(Product p, String type, int start, int count) {
         List<ProductImage> beans = new ArrayList<ProductImage>();
 
-        String sql = "select * from ProductImage where pid =? and type =? order by id desc limit ?,? ";
+        String sql = "select * from productimage where pid =? and type =? order by id desc limit ?,? ";
 
         try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
 

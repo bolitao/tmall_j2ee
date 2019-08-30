@@ -29,7 +29,7 @@ public class OrderDAO {
         int total = 0;
         try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
 
-            String sql = "select count(*) from Order_";
+            String sql = "select count(*) from order_";
 
             ResultSet rs = s.executeQuery(sql);
             while (rs.next()) {
@@ -109,7 +109,7 @@ public class OrderDAO {
 
         try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
 
-            String sql = "delete from Order_ where id = " + id;
+            String sql = "delete from order_ where id = " + id;
 
             s.execute(sql);
 
@@ -124,7 +124,7 @@ public class OrderDAO {
 
         try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
 
-            String sql = "select * from Order_ where id = " + id;
+            String sql = "select * from order_ where id = " + id;
 
             ResultSet rs = s.executeQuery(sql);
 
@@ -173,7 +173,7 @@ public class OrderDAO {
     public List<Order> list(int start, int count) {
         List<Order> beans = new ArrayList<Order>();
 
-        String sql = "select * from Order_ order by id desc limit ?,? ";
+        String sql = "select * from order_ order by id desc limit ?,? ";
 
         try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
 

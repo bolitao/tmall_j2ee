@@ -23,7 +23,7 @@ public class ReviewDAO {
         int total = 0;
         try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
 
-            String sql = "select count(*) from Review";
+            String sql = "select count(*) from review";
 
             ResultSet rs = s.executeQuery(sql);
             while (rs.next()) {
@@ -40,7 +40,7 @@ public class ReviewDAO {
         int total = 0;
         try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
 
-            String sql = "select count(*) from Review where pid = " + pid;
+            String sql = "select count(*) from review where pid = " + pid;
 
             ResultSet rs = s.executeQuery(sql);
             while (rs.next()) {
@@ -55,7 +55,7 @@ public class ReviewDAO {
 
     public void add(Review bean) {
 
-        String sql = "insert into Review values(null,?,?,?,?)";
+        String sql = "insert into review values(null,?,?,?,?)";
         try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
 
             ps.setString(1, bean.getContent());
@@ -78,7 +78,7 @@ public class ReviewDAO {
 
     public void update(Review bean) {
 
-        String sql = "update Review set content= ?, uid=?, pid=? , createDate = ? where id = ?";
+        String sql = "update review set content= ?, uid=?, pid=? , createDate = ? where id = ?";
         try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
             ps.setString(1, bean.getContent());
             ps.setInt(2, bean.getUser().getId());
@@ -98,7 +98,7 @@ public class ReviewDAO {
 
         try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
 
-            String sql = "delete from Review where id = " + id;
+            String sql = "delete from review where id = " + id;
 
             s.execute(sql);
 
@@ -113,7 +113,7 @@ public class ReviewDAO {
 
         try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
 
-            String sql = "select * from Review where id = " + id;
+            String sql = "select * from review where id = " + id;
 
             ResultSet rs = s.executeQuery(sql);
 
@@ -146,7 +146,7 @@ public class ReviewDAO {
     }
 
     public int getCount(int pid) {
-        String sql = "select count(*) from Review where pid = ? ";
+        String sql = "select count(*) from review where pid = ? ";
 
         try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
 
@@ -166,7 +166,7 @@ public class ReviewDAO {
     public List<Review> list(int pid, int start, int count) {
         List<Review> beans = new ArrayList<Review>();
 
-        String sql = "select * from Review where pid = ? order by id desc limit ?,? ";
+        String sql = "select * from review where pid = ? order by id desc limit ?,? ";
 
         try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
 
@@ -204,7 +204,7 @@ public class ReviewDAO {
 
     public boolean isExist(String content, int pid) {
 
-        String sql = "select * from Review where content = ? and pid = ?";
+        String sql = "select * from review where content = ? and pid = ?";
 
         try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
             ps.setString(1, content);

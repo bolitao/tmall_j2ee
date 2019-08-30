@@ -23,7 +23,7 @@ public class OrderItemDAO {
         int total = 0;
         try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
 
-            String sql = "select count(*) from OrderItem";
+            String sql = "select count(*) from orderitem";
 
             ResultSet rs = s.executeQuery(sql);
             while (rs.next()) {
@@ -38,7 +38,7 @@ public class OrderItemDAO {
 
     public void add(OrderItem bean) {
 
-        String sql = "insert into OrderItem values(null,?,?,?,?)";
+        String sql = "insert into orderitem values(null,?,?,?,?)";
         try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
 
             ps.setInt(1, bean.getProduct().getId());
@@ -66,7 +66,7 @@ public class OrderItemDAO {
 
     public void update(OrderItem bean) {
 
-        String sql = "update OrderItem set pid= ?, oid=?, uid=?,number=?  where id = ?";
+        String sql = "update orderitem set pid= ?, oid=?, uid=?,number=?  where id = ?";
         try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
 
             ps.setInt(1, bean.getProduct().getId());
@@ -91,7 +91,7 @@ public class OrderItemDAO {
 
         try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
 
-            String sql = "delete from OrderItem where id = " + id;
+            String sql = "delete from orderitem where id = " + id;
 
             s.execute(sql);
 
@@ -106,7 +106,7 @@ public class OrderItemDAO {
 
         try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
 
-            String sql = "select * from OrderItem where id = " + id;
+            String sql = "select * from orderitem where id = " + id;
 
             ResultSet rs = s.executeQuery(sql);
 
@@ -143,7 +143,7 @@ public class OrderItemDAO {
     public List<OrderItem> listByUser(int uid, int start, int count) {
         List<OrderItem> beans = new ArrayList<OrderItem>();
 
-        String sql = "select * from OrderItem where uid = ? and oid=-1 order by id desc limit ?,? ";
+        String sql = "select * from orderitem where uid = ? and oid=-1 order by id desc limit ?,? ";
 
         try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
 
@@ -189,7 +189,7 @@ public class OrderItemDAO {
     public List<OrderItem> listByOrder(int oid, int start, int count) {
         List<OrderItem> beans = new ArrayList<OrderItem>();
 
-        String sql = "select * from OrderItem where oid = ? order by id desc limit ?,? ";
+        String sql = "select * from orderitem where oid = ? order by id desc limit ?,? ";
 
         try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
 
@@ -235,7 +235,7 @@ public class OrderItemDAO {
     public List<OrderItem> listByProduct(int pid, int start, int count) {
         List<OrderItem> beans = new ArrayList<OrderItem>();
 
-        String sql = "select * from OrderItem where pid = ? order by id desc limit ?,? ";
+        String sql = "select * from orderitem where pid = ? order by id desc limit ?,? ";
 
         try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
 
@@ -278,7 +278,7 @@ public class OrderItemDAO {
         int total = 0;
         try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
 
-            String sql = "select sum(number) from OrderItem where pid = " + pid;
+            String sql = "select sum(number) from orderitem where pid = " + pid;
 
             ResultSet rs = s.executeQuery(sql);
             while (rs.next()) {
