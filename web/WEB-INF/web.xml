@@ -86,4 +86,13 @@
         <servlet-name>userServlet</servlet-name>
         <url-pattern>/userServlet</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>orderServlet</servlet-name>
+        <servlet-class>tmall.servlet.OrderServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>orderServlet</servlet-name>
+        <url-pattern>/orderServlet</url-pattern>
+    </servlet-mapping>
 </web-app>

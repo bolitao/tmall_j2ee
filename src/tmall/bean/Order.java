@@ -26,7 +26,6 @@ public class Order {
     private int totalNumber;
     private String status;
 
-
     public String getStatusDesc() {
         String desc = "未知";
         switch (status) {
