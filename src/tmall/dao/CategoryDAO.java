@@ -1,5 +1,6 @@
 package tmall.dao;
 
+import org.apache.log4j.Logger;
 import tmall.bean.Category;
 import tmall.util.DBUtil;
 
@@ -11,6 +12,8 @@ import java.util.List;
  * @author boli
  */
 public class CategoryDAO {
+    Logger logger = Logger.getLogger(CategoryDAO.class);
+
     public int getTotal() {
         int total = 0;
         try (Connection connection = DBUtil.getConnection();
@@ -109,6 +112,8 @@ public class CategoryDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        logger.debug(categoryList.toString());
+        System.out.println(categoryList.toString());
         return categoryList;
     }
 
