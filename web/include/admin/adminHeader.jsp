@@ -45,12 +45,12 @@
                 $("#" + id)[0].focus();
                 return false;
             }
-            if (parseInt(value) !== value) {
+            var regex = /^\d+$/;
+            if (!regex.test(value)) {
                 alert(name + "必须是整数");
                 $("#" + id)[0].focus();
-                return false;
+                return false
             }
-
             return true;
         }
 

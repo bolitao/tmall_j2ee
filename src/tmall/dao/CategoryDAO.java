@@ -117,7 +117,7 @@ public class CategoryDAO {
      *
      * @return all category result
      */
-    public List<Category> categoryList() {
+    public List<Category> list() {
         return list(0, Short.MAX_VALUE);
     }
 }

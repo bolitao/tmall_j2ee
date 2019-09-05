@@ -70,6 +70,15 @@ public class CategoryServlet extends BaseBackServlet {
         return "admin/editCategory.jsp";
     }
 
+    /**
+     * 修改已存在的分类信息
+     * FIXME: 修改分类图片后浏览器仍然从缓存中加载旧图片
+     *
+     * @param request  request
+     * @param response response
+     * @param page     page
+     * @return 跳转信息
+     */
     @Override
     public String update(HttpServletRequest request, HttpServletResponse response, Page page) {
         Map<String, String> params = new HashMap<>();
