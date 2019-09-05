@@ -154,9 +154,9 @@ public class OrderItemDAO {
     }
 
     public List<OrderItem> listByOrder(int oid, int start, int count) {
-        List<OrderItem> beans = new ArrayList<OrderItem>();
+        List<OrderItem> orderItems = new ArrayList<OrderItem>();
         String sql = "select * from orderitem where oid = ? order by id desc limit ?,? ";
-        try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
+        try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
             ps.setInt(1, oid);
             ps.setInt(2, start);
             ps.setInt(3, count);
@@ -177,12 +177,12 @@ public class OrderItemDAO {
                 bean.setUser(user);
                 bean.setNumber(number);
                 bean.setId(id);
-                beans.add(bean);
+                orderItems.add(bean);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return beans;
+        return orderItems;
     }
 
     public List<OrderItem> listByProduct(int pid) {
