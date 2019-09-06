@@ -14,10 +14,20 @@
     <facet type="web" name="Web2">
       <configuration>
         <descriptors>
-          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/out/artifacts/tmall/WEB-INF/web.xml" />
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/web/WEB-INF/classes/artifacts/tmall_j2ee_Web_exploded/WEB-INF/web.xml" />
         </descriptors>
         <webroots>
-          <root url="file://$MODULE_DIR$/out/artifacts/tmall" relative="/" />
+          <root url="file://$MODULE_DIR$/web/WEB-INF/classes/artifacts/tmall_j2ee_Web_exploded" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web3">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/out/tmall_j2ee_Web_exploded/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/out/tmall_j2ee_Web_exploded" relative="/" />
         </webroots>
       </configuration>
     </facet>

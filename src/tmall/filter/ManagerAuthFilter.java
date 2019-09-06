@@ -1,5 +1,7 @@
 package tmall.filter;
 
+import org.apache.log4j.Logger;
+
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import java.io.IOException;
@@ -11,6 +13,7 @@ import java.io.IOException;
  */
 @WebFilter(filterName = "ManagerAuthFilter")
 public class ManagerAuthFilter implements Filter {
+    Logger logger = Logger.getLogger(ManagerAuthFilter.class);
     @Override
     public void destroy() {
     }
