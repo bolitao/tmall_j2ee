@@ -87,6 +87,7 @@ public class CategoryDAO {
     }
 
     /**
+     * TODO: 订单项和 fill() 方法
      * Query categories by given start and count
      *
      * @param start start
@@ -112,8 +113,7 @@ public class CategoryDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        logger.debug(categoryList.toString());
-        System.out.println(categoryList.toString());
+        // logger.debug(categoryList.toString());
         return categoryList;
     }
 

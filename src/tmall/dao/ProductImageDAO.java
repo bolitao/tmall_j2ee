@@ -13,6 +13,8 @@ import tmall.bean.ProductImage;
 import tmall.util.DBUtil;
 
 /**
+ * TODO: 梳理几个图片的关系
+ *
  * @author boli
  */
 public class ProductImageDAO {
